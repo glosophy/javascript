@@ -3,6 +3,8 @@ async function drawBars() {
   // 1. Access data
   const dataset = await d3.json("./mainCat.json")
 
+  console.table(dataset[0])
+
   // 2. Create chart dimensions
   const width = 500
   let dimensions = {
@@ -76,7 +78,7 @@ async function drawBars() {
 
     const oldBinGroups = binGroups.exit()
     oldBinGroups.selectAll('rect')
-          .style('fill', 'red')
+          //.style('fill', 'red')
         .transition(exitTransition)
           .attr('y', dimensions.boundedHeight)
           .attr('height', 0)
@@ -85,14 +87,103 @@ async function drawBars() {
         .transition(exitTransition)
           .attr('y', dimensions.boundedHeight)
 
-          
+    oldBinGroups
+        .transition(exitTransition)
+            .remove()
+
+    const newBinGroups = binGroups.enter().append('g')
+        .attr('class', 'bin')
+
+    newBinGroups.append('rect')
+            .attr('height', 0)
+            .attr('x', d => xScale(d.x0) + barPadding)
+            .attr('y', dimensions.boundedHeight)
+            .attr('width', d => d3.max([
+              0,
+              xScale(d.x1) - xScale(d.x0) - barPadding
+            ]))
+            //.style('fill', 'yellowgreen')
+
+    newBinGroups.append('text')
+          .attr('x', d => xScale(d.x0)
+              + (xScale(d.x1) - xScale(d.x0)) / 2
+            )
+          .attr('y', dimensions.boundedHeight)
 
 
+    // update binGroups to include new points
+    binGroups = newBinGroups.merge(binGroups)
+
+    const barRects = binGroups.select('rect')
+      .transition(updateTransition)
+        .attr('x', d => xScale(d.x0) + barPadding)
+        .attr('y', d => yScale(yAccessor(d)))
+        .attr('height', d => dimensions.boundedHeight - yScale(yAccessor(d)))
+        .attr('width', d => d3.max([
+          0,
+          xScale(d.x1) - xScale(d.x0) - barPadding
+        ]))
+      .transition()
+        .style('fill', 'cornflowerblue')
+
+    const barText = binGroups.select('text')
+      .transition(updateTransition)
+        .attr('x', d => xScale(d.x0) + (xScale(d.x1) - xScale(d.x0)) / 2)
+        .attr('y', d => yScale(yAccessor(d)) - 5)
+        .text(d => yAccessor(d) || '')
+
+    const mean = d3.mean(dataset, metricAccessor)
+
+    const meanLine = bounds.selectAll('.mean')
+      .transition(updateTransition)
+        .attr('x1', xScale(mean))
+        .attr('x2', xScale(mean))
+        .attr('y1', -20)
+        .attr('y2', dimensions.boundedHeight)
+
+
+    // 6. Draw peripherals
+    const xAxisGenerator = d3.axisBottom()
+      .scale(xScale)
+
+    const xAxis = bounds.select('.x-axis')
+      .transition(updateTransition)
+      .call(xAxisGenerator)
+
+    const xAxisLabel = xAxis.select('.x-axis-label')
+        .text(metric)
   }
 
+  const metrics = [
+    'hf_score',
+    'pf_rol',
+    'pf_ss',
+    'pf_movement',
+    'pf_religion',
+    'pf_assembly',
+    'pf_expression',
+    'pf_identity',
+    'pf_score',
+    'pf_womens',
+    'ef_size',
+    'ef_property',
+    'ef_money',
+    'ef_trade',
+    'ef_regulation',
+    'ef_score'
+  ]
 
-  // 6. Draw peripherals
+  let selectedMetricIndex = 0
+  drawHistogram(metrics[selectedMetricIndex])
 
+  const button = d3.select('body')
+    .append('button')
+      .text('Change indicator')
 
+  button.node().addEventListener('click', onClick)
+  function onClick() {
+    selectedMetricIndex = (selectedMetricIndex + 1) % metrics.length
+    drawHistogram(metrics[selectedMetricIndex])
+  }
 }
 drawBars()

@@ -15,4 +15,4 @@ columns = ['year', 'hf_score', 'pf_rol', 'pf_ss', 'pf_movement', 'pf_religion', 
 df_hist = df_hist[columns]
 
 # export to json
-df_hist.to_json(cwd + '/histograms/mainCat.json')
+df_hist.to_json(cwd + '/histograms/mainCat.json', orient='records')
