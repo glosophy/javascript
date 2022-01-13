@@ -124,7 +124,7 @@ async function drawBars() {
           xScale(d.x1) - xScale(d.x0) - barPadding
         ]))
       .transition()
-        .style('fill', 'cornflowerblue')
+        .style('fill', '#ff5440')
 
     const barText = binGroups.select('text')
       .transition(updateTransition)
