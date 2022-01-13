@@ -1,5 +1,5 @@
 .bin rect {
-    fill: cornflowerblue;
+    fill: #ff5440;
 }
 .bin text {
     text-anchor: middle;
@@ -9,7 +9,7 @@
 }
 
 .mean {
-    stroke: maroon;
+    stroke: grey;
     stroke-dasharray: 2px 4px;
 }
 
@@ -17,6 +17,13 @@
     fill: black;
     font-size: 1.4em;
     text-transform: capitalize;
+}
+
+p {
+    font-family: Helvetica, sans-serif;
+    font-size: 20px;
+    text-align: center;
+    font-weight: bold;
 }
 
 body {
@@ -32,11 +39,11 @@ button {
     padding: 0.5em 1em;
     appearance: none;
     -webkit-appearance: none;
-    background:darkseagreen;
+    background: #ff5440;
     color: white;
     border: none;
-    box-shadow: 0 5px 0 0 seagreen;
-    border-radius: 6px;
+    box-shadow: 0 5px 0 0 #b23a2c;
+    border-radius: 4px;
     font-weight: 600;
     outline: none;
     cursor: pointer;
@@ -45,14 +52,14 @@ button {
 
 button:hover,
 button:focus {
-    background: #73b173;
-    box-shadow: 0 4px 0 0 seagreen;
+    background:#ff5440;
+    box-shadow: 0 4px 0 0 #b23a2c;
     transform: translateY(1px);
 }
 
 button:hover:active,
 button:focus:active,
 button:active {
-    box-shadow: 0 1px 0 0 seagreen;
+    box-shadow: 0 1px 0 0 #b23a2c;
     transform: translateY(4px);
 }
