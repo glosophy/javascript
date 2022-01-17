@@ -16,3 +16,8 @@ df_hist = df_hist[columns]
 
 # export to json
 df_hist.to_json(cwd + '/histograms/mainCat.json', orient='records')
+
+# slice df for voronoi
+df_voronoi = df.loc[df['year'] == 2019]
+df_voronoi = df_voronoi[['countries', 'pf_score', 'ef_score']]
+df_voronoi.to_json(cwd + '/voronoi/scatterVoronoi.json', orient='records')
