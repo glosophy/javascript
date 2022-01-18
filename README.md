@@ -8,3 +8,4 @@ This repo includes:
 * `all_countries.csv`: *Human Freedom Index* data
 * `dataFile.py`: Python script for slicing/exporting the data according to charts needs
 * `/histograms`: histograms with `d3.transition()`. [Here is a tweet](https://twitter.com/gsutters/status/1481422689940217861?s=20) I made with the final result.
+* `/voronoi`: a scatter plot turned into a voronoi chart. [Here is a tweet](https://twitter.com/gsutters/status/1483243151796154373?s=20) I made with the final result.
