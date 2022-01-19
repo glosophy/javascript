@@ -55,14 +55,11 @@
 
         // Compute the size of the biggest circle as a function of peoplePerPixel.
         var peopleMax = rScale.domain()[1];
-
-        console.log(peopleMax)
-
+        // console.log(peopleMax)
         var rMin = 0;
         var rMax = Math.sqrt(peopleMax / (peoplePerPixel * Math.PI));
 
-        console.log(rMax)
-        
+        // console.log(rMax)
         rScale.range([rMin, rMax]);
 
         var circles = g.selectAll("circle").data(data);
