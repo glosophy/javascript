@@ -20,7 +20,7 @@
     <script>
 
       // Define variables from csv
-      var colorColumn = "quartile";
+      var colorColumn = "hf_quartile";
       var xColumn = "longitude";
       var yColumn = "latitude";
       var rColumn = "population";
@@ -76,11 +76,11 @@
         d.latitude   = +d.latitude;
         d.longitude  = +d.longitude;
         d.population = +d.population;
-        d.quartile = +d.quartile;
+        d.hf_quartile = +d.hf_quartile;
         return d;
       }
 
-      d3.csv("https://gist.githubusercontent.com/glosophy/17c622561b873805646f1925e07722ba/raw/85949e73fdc7d999a1f54bc20a4f8da767fcde09/world-cities.csv", type, render);
+      d3.csv("https://gist.github.com/glosophy/0a57d18948738646a71969c8e55623cf", type, render);
 
     </script>
   </body>
