@@ -30,9 +30,10 @@ merge_hfi = hfi[['year', 'countries', 'ISO', 'hf_score', 'hf_quartile', 'pf_scor
 
 # merge datasets
 # left merge of merge_hfi + merge_pop
-hfi_cities = merge_hfi.merge(merge_pop, how='left', left_on='ISO', right_on='ISO3')
+hfi_cities = merge_pop.merge(merge_hfi, how='left', left_on='ISO3', right_on='ISO')
+print(hfi_cities.head())
 # left merge of merge_cities + hfi_cities
-final_df = merge_cities.merge(hfi_cities, how='left', left_on='country code', right_on='ISO2')
+final_df = pd.merge(hfi_cities, merge_cities, how='left', on=['country code', 'ISO2'])
 
 df2019 = final_df.loc[final_df['year'] == 2019]
 df2019['hf_quartile'] = df2019['hf_quartile'].fillna(0)
