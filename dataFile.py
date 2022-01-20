@@ -6,7 +6,7 @@ cwd = os.getcwd()
 print('cwd:', cwd)
 
 # slice df for histogram
-df = pd.read_csv(cwd + '/all_countries.csv')
+df = pd.read_csv(cwd + '/hfi_cc_2021.csv')
 
 df_hist = df.loc[df['year'] == 2019]
 columns = ['year', 'hf_score', 'pf_rol', 'pf_ss', 'pf_movement', 'pf_religion', 'pf_assembly', 'pf_expression',

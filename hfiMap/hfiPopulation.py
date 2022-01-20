@@ -41,23 +41,17 @@ hfi_cities = merge_pop.merge(merge_hfi, how='left', left_on='ISO3', right_on='IS
 # left merge of merge_cities + hfi_cities
 final_df = hfi_cities.merge(merge_cities, how='left', left_on='ISO2', right_on='country code')
 
-#Fill NaN with Zeros
+# fill NaN with Zeros
 final_df['hf_quartile'] = final_df['hf_quartile'].fillna(0)
 print(final_df['ISO2'].nunique())
 
-#Filter by year 2019
+# filter by year 2019
 df2019 = final_df.loc[final_df['year'] == 2019]
 
-#Print rows with NaN values
+# print rows with NaN values
 print(df2019[df2019.isna().any(axis=1)])
 
-#count Unique values - Count Countries
+# count Unique values - Count Countries
 print(df2019['countries'].nunique())
 
-
-# print(df2019.head(10000))
-
-# print(final_df.sort_values(by=['population'], ascending=False))
-
-# df2019['hf_quartile'] = df2019['hf_quartile'].fillna(0)
-# df2019.to_csv('cities2019.csv', index='reset')
+df2019.to_csv('cities2019.csv', index='reset')
