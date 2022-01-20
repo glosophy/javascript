@@ -1,6 +1,12 @@
 import bs4 as bs
 import urllib.request
 import pandas as pd
+pd.set_option('display.max_columns', 500)
+pd.set_option('display.max_rows', 10000)
+pd.set_option('display.width', 1000)
+
+
+
 
 source = urllib.request.urlopen('https://www.geonames.org/countries/').read()
 soup = bs.BeautifulSoup(source, 'lxml')
@@ -31,10 +37,27 @@ merge_hfi = hfi[['year', 'countries', 'ISO', 'hf_score', 'hf_quartile', 'pf_scor
 # merge datasets
 # left merge of merge_hfi + merge_pop
 hfi_cities = merge_pop.merge(merge_hfi, how='left', left_on='ISO3', right_on='ISO')
-print(hfi_cities.head())
+# print(hfi_cities.head())
 # left merge of merge_cities + hfi_cities
-final_df = pd.merge(hfi_cities, merge_cities, how='left', on=['country code', 'ISO2'])
+final_df = hfi_cities.merge(merge_cities, how='left', left_on='ISO2', right_on='country code')
 
+#Fill NaN with Zeros
+final_df['hf_quartile'] = final_df['hf_quartile'].fillna(0)
+print(final_df['ISO2'].nunique())
+
+#Filter by year 2019
 df2019 = final_df.loc[final_df['year'] == 2019]
-df2019['hf_quartile'] = df2019['hf_quartile'].fillna(0)
-df2019.to_csv('cities2019.csv', index='reset')
+
+#Print rows with NaN values
+print(df2019[df2019.isna().any(axis=1)])
+
+#count Unique values - Count Countries
+print(df2019['countries'].nunique())
+
+
+# print(df2019.head(10000))
+
+# print(final_df.sort_values(by=['population'], ascending=False))
+
+# df2019['hf_quartile'] = df2019['hf_quartile'].fillna(0)
+# df2019.to_csv('cities2019.csv', index='reset')
