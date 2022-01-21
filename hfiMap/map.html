@@ -11,7 +11,7 @@
       }
 
       circle {
-        fill-opacity: 0.35;
+        fill-opacity: 0.75;
       }
 
     </style>
@@ -24,11 +24,11 @@
       var xColumn = "longitude";
       var yColumn = "latitude";
       var rColumn = "population";
-      var peoplePerPixel = 100000;
+      var peoplePerPixel = 10000;
 
       // Define SVG + bounds
-      var outerWidth  = 1300;
-      var outerHeight = 700;
+      var outerWidth  = 2600;
+      var outerHeight = 1400;
       var margin = { left: -50, top: 0, right: -50, bottom: 0 };
 
       var innerWidth  = outerWidth  - margin.left - margin.right;
@@ -45,7 +45,9 @@
       var xScale = d3.scale.linear().range([0, innerWidth]);
       var yScale = d3.scale.linear().range([innerHeight, 0]);
       var rScale = d3.scale.sqrt();
-      var colorScale = d3.scale.category10();
+      var colorScale = d3.scale.category10()
+          .domain([0, 1, 2, 3, 4])
+          .range(['#000000', '#000000', '#000000', '#000000', '#000000']);
 
       function render(data){
 
@@ -56,7 +58,7 @@
         // Compute the size of the biggest circle as a function of peoplePerPixel.
         var peopleMax = rScale.domain()[1];
         // console.log(peopleMax)
-        var rMin = 0;
+        var rMin = 0.3;
         var rMax = Math.sqrt(peopleMax / (peoplePerPixel * Math.PI));
 
         // console.log(rMax)
@@ -80,7 +82,7 @@
         return d;
       }
 
-      d3.csv("https://gist.github.com/glosophy/0a57d18948738646a71969c8e55623cf", type, render);
+      d3.csv("https://gist.githubusercontent.com/glosophy/0a57d18948738646a71969c8e55623cf/raw/87343a42c4a753c0890c5e6eca7bf4f7412e4e28/cities2019.csv", type, render);
 
     </script>
   </body>

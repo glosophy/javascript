@@ -5,9 +5,6 @@ pd.set_option('display.max_columns', 500)
 pd.set_option('display.max_rows', 10000)
 pd.set_option('display.width', 1000)
 
-
-
-
 source = urllib.request.urlopen('https://www.geonames.org/countries/').read()
 soup = bs.BeautifulSoup(source, 'lxml')
 table = soup.find('table', id='countries')
