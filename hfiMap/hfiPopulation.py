@@ -28,6 +28,7 @@ namibia = pd.read_csv('na.csv')
 namibia = namibia.rename(columns={'city': 'asciiname', 'lat': 'latitude', 'lng': 'longitude',
                                   'country': 'countries'})
 namibia = namibia.drop(['iso2', 'admin_name', 'capital', 'population_proper'], axis=1)
+namibia[['population', 'latitude', 'longitude']] = namibia[['population', 'latitude', 'longitude']].astype(str)
 
 # read cities.csv
 # error: https://stackoverflow.com/questions/18171739/unicodedecodeerror-when-reading-csv-file-in-pandas-with-python
@@ -41,12 +42,26 @@ merge_hfi = hfi[['year', 'countries', 'ISO', 'hf_score', 'hf_quartile', 'pf_scor
 # merge datasets
 # left merge of merge_hfi + merge_pop
 hfi_cities = merge_pop.merge(merge_hfi, how='left', left_on='ISO3', right_on='ISO')
-# print(hfi_cities.head())
+
 # left merge of merge_cities + hfi_cities
 final_df = hfi_cities.merge(merge_cities, how='left', left_on='ISO2', right_on='country code')
 
-final = final_df.merge(namibia, how='left', left_on=['countries', 'population', 'latitude', 'longitude', 'asciiname'],
-                       right_on=['countries', 'population', 'latitude', 'longitude', 'asciiname'])
+final = final_df.merge(namibia, how='left', left_on=['countries'],
+                       right_on=['countries'])
+print(final.head())
+
+# combine columns that merged
+repl = ['asciiname_x', 'latitude_x', 'longitude_x', 'population_x']
+old = ['asciiname_y', 'latitude_y', 'longitude_y', 'population_y']
+
+for i in range(len(repl)):
+    final[repl[i]] = final[repl[i]].fillna(final[old[i]])
+
+final = final.drop(['asciiname_y', 'latitude_y', 'longitude_y', 'population_y'], axis=1)
+
+final = final.rename(columns={'asciiname_x': 'asciiname', 'latitude_x': 'latitude', 'longitude_x': 'longitude',
+                              'population_x': 'population'})
+
 print(final.head())
 
 # fill quartile NaN with zeros, fill year NaN with 2019 to account for countries that are not in the HFI
