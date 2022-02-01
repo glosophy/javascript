@@ -1,0 +1,17 @@
+city,lat,lng,country,iso2,admin_name,capital,population,population_proper
+Windhoek,-22.5700,17.0836,Namibia,NA,Khomas,primary,322500,322500
+Walvisbaai,-22.9494,14.5069,Namibia,NA,Erongo,,85000,85000
+Rundu,-17.9167,19.7667,Namibia,NA,Kavango East,admin,63431,63431
+Swakopmund,-22.6667,14.5333,Namibia,NA,Erongo,admin,34300,34300
+Katima Mulilo,-17.5039,24.2750,Namibia,NA,Zambezi,admin,28699,28699
+Otjiwarongo,-20.4642,16.6528,Namibia,NA,Otjozondjupa,admin,28249,28249
+Rehoboth,-23.3167,17.0833,Namibia,NA,Hardap,,25219,21377
+Keetmanshoop,-26.5833,18.1333,Namibia,NA,//Karas,admin,18900,18900
+Gobabis,-22.4500,18.9667,Namibia,NA,Omaheke,admin,16321,16321
+Mariental,-24.6333,17.9667,Namibia,NA,Hardap,admin,12478,12478
+Opuwo,-18.0607,13.8400,Namibia,NA,Kunene,admin,4857,4857
+Outapi,-17.5028,14.9856,Namibia,NA,Omusati,admin,4606,4606
+Oshakati,-17.8000,15.6833,Namibia,NA,Oshana,admin,,
+Eenhana,-17.4667,16.3333,Namibia,NA,Ohangwena,admin,,
+Omuthiya,-18.3592,16.5795,Namibia,NA,Oshikoto,admin,,
+Nkurenkuru,-17.6167,18.6000,Namibia,NA,Kavango West,admin,,
