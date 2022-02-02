@@ -1,7 +1,7 @@
 async function drawChart() {
 
   // 1. Access data
-  let dataset = await d3.csv("https://gist.githubusercontent.com/glosophy/e51fd3b97d3de9eb7d53e4e44a1e3e2a/raw/cae164661a6d272837448796df6287429d8f9fc0/cities2019.csv")
+  let dataset = await d3.csv("https://gist.githubusercontent.com/glosophy/66d48c7bca4a94a7a1981379edd6d65b/raw/a698fa51fcf79262f01a14efc06dcec1545cb98a/cities2019.csv")
 
   const lat = d => d.latitude
   const long = d => d.longitude
@@ -10,18 +10,15 @@ async function drawChart() {
 
   // 2. Create chart dimensions
 
-  const width = d3.min([
-    window.innerWidth * 0.9,
-    window.innerHeight * 0.9,
-  ])
+  const width = 1500
   let dimensions = {
     width: width,
-    height: width,
+    height: width * 0.85,
     margin: {
       top: 0,
-      right: -50,
+      right: 50,
       bottom: 0,
-      left: -50,
+      left: 50,
     },
   }
   dimensions.boundedWidth = dimensions.width - dimensions.margin.left - dimensions.margin.right
@@ -50,9 +47,13 @@ async function drawChart() {
       // Compute the size of the biggest circle as a function of peoplePerPixel.
       const rScale = d3.scaleSqrt()
       const peopleMax = rScale.domain()[1]
-      const peoplePerPixel = 1000
-      const rMin = 0.3
+      const peoplePerPixel = 10000
+      const rMin = 20
       const rMax = Math.sqrt(peopleMax / (peoplePerPixel * Math.PI))
+
+      console.log(rMax)
+      console.log(rMin)
+      console.log(peopleMax)
 
       rScale
         .domain([0, d3.max(dataset, d => d.population)])
@@ -61,8 +62,7 @@ async function drawChart() {
 
       const colorScale = d3.scaleOrdinal(d3.schemeCategory10)
         .domain([0, 1, 2, 3, 4])
-        .range(['#FFFFFF', '#000000', '#000000', '#000000', '#000000'])
-
+        .range(['red', 'blue', '#000000', '#000000', '#000000'])
 
 
       // draw the points
