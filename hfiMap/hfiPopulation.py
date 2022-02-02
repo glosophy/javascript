@@ -71,6 +71,8 @@ final['year'] = final['year'].fillna(2019)
 # fill missing country names with countries from geonames
 final['countries'] = final['countries'].fillna(final['country'])
 
+final[['population', 'latitude', 'longitude']] = final[['population', 'latitude', 'longitude']].astype(float)
+
 # filter by year 2019
 df2019 = final.loc[final['year'] == 2019]
 
