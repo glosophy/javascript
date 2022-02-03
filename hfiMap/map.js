@@ -15,14 +15,13 @@ async function drawChart() {
     window.innerHeight * 2,
     ])
 
-
     let dimensions = {
         width: width,
         height: width * 0.5,
         margin: {
-            top: 0,
-            right: 50,
-            bottom: 0,
+            top: 10,
+            right: 10,
+            bottom: 50,
             left: 50,
         },
     }
@@ -39,8 +38,6 @@ async function drawChart() {
     const bounds = wrapper.append("g")
         .style("transform", `translate(${dimensions.margin.left}px, ${dimensions.margin.top}px)`)
 
-
-    function drawScatter(dataset) {
         // create scales
         const xScale = d3.scaleLinear()
             .domain(d3.extent(dataset, long))
@@ -49,7 +46,6 @@ async function drawChart() {
         const yScale = d3.scaleLinear()
             .domain(d3.extent(dataset, lat))
             .range([dimensions.boundedHeight, 0])
-
 
         // Compute the size of the biggest circle as a function of peoplePerPixel.
         const rScale = d3.scaleSqrt()
@@ -62,34 +58,80 @@ async function drawChart() {
 
         rScale.range([rMin, rMax])
 
-
         console.log(rMax)
         console.log(rMin)
         console.log(peopleMax)
-
-        // rScale
-        //     .domain([0, d3.max(dataset, d => d.population)])
-        //     .range([rMin, rMax])
-
 
         const colorScale = d3.scaleOrdinal(d3.schemeCategory10)
             .domain([0, 1, 2, 3, 4])
             .range(['red', 'blue', 'orange', 'green', 'purple'])
 
+  const drawScatter = (dataset) => {
 
         // draw the points
         const dots = bounds.selectAll("circle")
             .data(dataset)
-            .enter().append("circle")
+
+        const newDots = dots.enter().append("circle")
+        .on("mouseenter", onMouseEnter)
+        .on("mouseleave", onMouseLeave)
+
+        const allDots = newDots.merge(dots)
             .attr("cx", d => xScale(long(d)))
             .attr("cy", d => yScale(lat(d)))
             .attr("r", d => rScale(population(d)))
             .attr("fill", d => colorScale(quartile(d)))
-            .exit().remove()
+
+
+        const oldDots = dots.exit()
+            .remove()
 
     }
 
-    drawScatter(dataset)
+  drawScatter(dataset)
+
+  const tooltip = d3.select("#tooltip")
+
+  function onMouseEnter(e, datum) {
+
+    const dayDot = bounds.append("circle")
+        .attr("class", "tooltipDot")
+        .attr("cx", xScale(lat(datum)))
+        .attr("cy", yScale(long(datum)))
+        .attr("r", rScale(population(datum)))
+        .style("fill", "#ff5440")
+        .style("pointer-events", "none")
+
+    const formatPopulation = d3.format(",")
+    tooltip.select("#population")
+        .text(formatPopulation(datum.population))
+
+    tooltip.select("#countries")
+        .text(datum.country)
+
+    tooltip.select("#city")
+        .text(datum.asciiname)
+
+    const x = xScale(lat(datum))
+      + dimensions.margin.left
+    const y = yScale(long(datum))
+      + dimensions.margin.top
+
+    tooltip.style("transform", `translate(`
+      + `calc( -50% + ${x}px),`
+      + `calc(-100% + ${y}px)`
+      + `)`)
+
+    tooltip.style("opacity", 1)
+    
+    }
+
+  function onMouseLeave() {
+    d3.selectAll(".tooltipDot")
+      .remove()
+
+    tooltip.style("opacity", 0)
+  }
 }
 
 drawChart()

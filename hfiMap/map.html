@@ -2,22 +2,30 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <link rel="stylesheet" href="./styles.css"></link>
     <title>D3 Example</title>
-    <style>
-
-      body {
-        background: white;
-      }
-
-      circle {
-        fill-opacity: 0.75;
-      }
-
-    </style>
+    
   </head>
   <body>
 
-    <div id="wrapper"></div>
+    <div id="wrapper">
+      <div id="tooltip" class="tooltip">
+
+            <div class="tooltip-countries">
+                Country: <span id="countries"></span>
+            </div>
+
+            <div class="tooltip-city">
+                City: <span id="city"></span>
+            </div>
+
+            <div class="tooltip-population">
+                Population: <span id="population"></span>
+            </div>
+
+      </div>
+
+    </div>
 
         <script src="./../d3.v6.js"></script>
         <script src="./map.js"></script>
