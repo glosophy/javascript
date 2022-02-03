@@ -74,7 +74,6 @@ async function drawChart() {
 
         const newDots = dots.enter().append("circle")
 
-
         const allDots = newDots.merge(dots)
             .attr("cx", d => xScale(long(d)))
             .attr("cy", d => yScale(lat(d)))
