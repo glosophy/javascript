@@ -11,7 +11,7 @@ async function drawChart() {
     // 2. Create chart dimensions
 
     const width = d3.min([
-    window.Width * 2,
+    window.innerWidth * 2,
     window.innerHeight * 2,
     ])
 
@@ -73,15 +73,15 @@ async function drawChart() {
             .data(dataset)
 
         const newDots = dots.enter().append("circle")
-        .on("mouseenter", onMouseEnter)
-        .on("mouseleave", onMouseLeave)
+
 
         const allDots = newDots.merge(dots)
             .attr("cx", d => xScale(long(d)))
             .attr("cy", d => yScale(lat(d)))
             .attr("r", d => rScale(population(d)))
             .attr("fill", d => colorScale(quartile(d)))
-
+            .on("mouseenter", onMouseEnter)
+            .on("mouseleave", onMouseLeave)
 
         const oldDots = dots.exit()
             .remove()
@@ -119,11 +119,11 @@ async function drawChart() {
 
     tooltip.style("transform", `translate(`
       + `calc( -50% + ${x}px),`
-      + `calc(-100% + ${y}px)`
+      + `calc(-50% + ${y}px)`
       + `)`)
 
     tooltip.style("opacity", 1)
-    
+
     }
 
   function onMouseLeave() {
