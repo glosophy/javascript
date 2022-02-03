@@ -11,8 +11,8 @@ async function drawChart() {
     // 2. Create chart dimensions
 
     const width = d3.min([
-    window.innerWidth * 2,
-    window.innerHeight * 2,
+    window.innerWidth * 1.75,
+    window.innerHeight * 1.75,
     ])
 
     let dimensions = {
@@ -47,7 +47,7 @@ async function drawChart() {
             .domain(d3.extent(dataset, lat))
             .range([dimensions.boundedHeight, 0])
 
-        // Compute the size of the biggest circle as a function of peoplePerPixel.
+        // Compute the size of the biggest circle as a function of peoplePerPixel
         const rScale = d3.scaleSqrt()
           .domain([0, d3.max(dataset, d => d.population)])
 
@@ -58,13 +58,9 @@ async function drawChart() {
 
         rScale.range([rMin, rMax])
 
-        console.log(rMax)
-        console.log(rMin)
-        console.log(peopleMax)
-
         const colorScale = d3.scaleOrdinal(d3.schemeCategory10)
             .domain([0, 1, 2, 3, 4])
-            .range(['red', 'blue', 'orange', 'green', 'purple'])
+            .range(['grey', 'blue', 'orange', 'green', 'red'])
 
   const drawScatter = (dataset) => {
 
@@ -79,6 +75,7 @@ async function drawChart() {
             .attr("cy", d => yScale(lat(d)))
             .attr("r", d => rScale(population(d)))
             .attr("fill", d => colorScale(quartile(d)))
+            .style('opacity', 0.35)
             .on("mouseenter", onMouseEnter)
             .on("mouseleave", onMouseLeave)
 
@@ -95,11 +92,13 @@ async function drawChart() {
 
     const dayDot = bounds.append("circle")
         .attr("class", "tooltipDot")
-        .attr("cx", xScale(lat(datum)))
-        .attr("cy", yScale(long(datum)))
-        .attr("r", rScale(population(datum)))
-        .style("fill", "#ff5440")
+        .attr("cx", d => xScale(lat(datum)))
+        .attr("cy", d => yScale(long(datum)))
+        .attr("r", d => rScale(population(datum)))
+        // .style('stroke', 'black')
+        .style('stroke-width', 0.2)
         .style("pointer-events", "none")
+
 
     const formatPopulation = d3.format(",")
     tooltip.select("#population")
@@ -118,7 +117,7 @@ async function drawChart() {
 
     tooltip.style("transform", `translate(`
       + `calc( -50% + ${x}px),`
-      + `calc(-50% + ${y}px)`
+      + `calc( -100% + ${y}px)`
       + `)`)
 
     tooltip.style("opacity", 1)
