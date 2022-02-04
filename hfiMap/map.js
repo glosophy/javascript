@@ -31,7 +31,8 @@ async function drawChart() {
     dimensions.boundedHeight = dimensions.height - dimensions.margin.top - dimensions.margin.bottom
 
     // create chart area
-    const wrapper = d3.select("#wrapper")
+    const wrapper = d3
+        .select("#wrapper")
         .append("svg")
         .attr("width", dimensions.width)
         .attr("height", dimensions.height)
@@ -54,7 +55,7 @@ async function drawChart() {
 
         const peopleMax = rScale.domain()[1]
         const peoplePerPixel = 10000
-        const rMin = 0.1
+        const rMin = 0.05
         const rMax = Math.sqrt(peopleMax / (peoplePerPixel * Math.PI))
 
         rScale.range([rMin, rMax])
@@ -66,7 +67,8 @@ async function drawChart() {
   const drawScatter = (dataset) => {
 
         // draw the points
-        const dots = bounds.selectAll("circle")
+        const dots = bounds
+            .selectAll("circle")
             .data(dataset)
 
         const newDots = dots.enter().append("circle")
@@ -87,9 +89,10 @@ async function drawChart() {
   drawScatter(dataset)
 
     // set up interactions
-    bounds.selectAll('circle')
-        .on('mouseenter', onMouseEnter)
-        .on('mouseleave', onMouseLeave)
+    bounds
+      .selectAll('circle')
+      .on('mouseenter', onMouseEnter)
+      .on('mouseleave', onMouseLeave)
 
     const tooltip = d3.select('#tooltip')
     function onMouseEnter(e, datum) {
@@ -108,9 +111,9 @@ async function drawChart() {
       tooltip.select('#city')
           .text(datum.asciiname)
 
-      const x = xScale(lat(datum))
+      const x = xScale(long(datum))
         + dimensions.margin.left
-      const y = yScale(long(datum))
+      const y = yScale(lat(datum))
         + dimensions.margin.top
 
 
@@ -127,50 +130,7 @@ async function drawChart() {
       tooltip.style('opacity', 0)
     }
 
-  // const tooltip = d3.select("#tooltip")
-  //
-  // function onMouseEnter(e, datum) {
-  //
-  //   const dayDot = bounds.append("circle")
-  //       .attr("class", "tooltipDot")
-  //       .attr("cx", d => xScale(lat(datum)))
-  //       .attr("cy", d => yScale(long(datum)))
-  //       .attr("r", d => rScale(population(datum)))
-  //       // .style('stroke', 'black')
-  //       .style('stroke-width', 0.2)
-  //       .style("pointer-events", "none")
-  //
-  //
-  //   const formatPopulation = d3.format(",")
-  //   tooltip.select("#population")
-  //       .text(formatPopulation(datum.population))
-  //
-  //   tooltip.select("#countries")
-  //       .text(datum.country)
-  //
-  //   tooltip.select("#city")
-  //       .text(datum.asciiname)
-  //
-  //   const x = xScale(lat(datum))
-  //     + dimensions.margin.left
-  //   const y = yScale(long(datum))
-  //     + dimensions.margin.top
-  //
-  //   tooltip.style("transform", `translate(`
-  //     + `calc( -50% + ${x}px),`
-  //     + `calc( -100% + ${y}px)`
-  //     + `)`)
-  //
-  //   tooltip.style("opacity", 1)
-  //
-  //   }
-  //
-  // function onMouseLeave() {
-  //   d3.selectAll(".tooltipDot")
-  //     .remove()
-  //
-  //   tooltip.style("opacity", 0)
-  // }
+
 }
 
 drawChart()
