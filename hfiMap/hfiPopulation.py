@@ -1,6 +1,7 @@
 import bs4 as bs
 import urllib.request
 import pandas as pd
+import numpy as np
 
 pd.set_option('display.max_columns', 500)
 pd.set_option('display.max_rows', 10000)
@@ -48,7 +49,7 @@ final_df = hfi_cities.merge(merge_cities, how='left', left_on='ISO2', right_on='
 
 final = final_df.merge(namibia, how='left', left_on=['countries'],
                        right_on=['countries'])
-print(final.head())
+# print(final.head())
 
 # combine columns that merged
 repl = ['asciiname_x', 'latitude_x', 'longitude_x', 'population_x']
@@ -62,7 +63,7 @@ final = final.drop(['asciiname_y', 'latitude_y', 'longitude_y', 'population_y'],
 final = final.rename(columns={'asciiname_x': 'asciiname', 'latitude_x': 'latitude', 'longitude_x': 'longitude',
                               'population_x': 'population'})
 
-print(final.head())
+# print(final.head())
 
 # fill quartile NaN with zeros, fill year NaN with 2019 to account for countries that are not in the HFI
 final['hf_quartile'] = final['hf_quartile'].fillna(0)
@@ -71,9 +72,31 @@ final['year'] = final['year'].fillna(2019)
 # fill missing country names with countries from geonames
 final['countries'] = final['countries'].fillna(final['country'])
 
-final[['population', 'latitude', 'longitude']] = final[['population', 'latitude', 'longitude']].astype(float)
+final[['population', 'latitude', 'longitude', 'hf_score']] = final[
+    ['population', 'latitude', 'longitude', 'hf_score']].astype(float)
 
 # filter by year 2019
 df2019 = final.loc[final['year'] == 2019]
 
 df2019.to_csv('cities2019.csv', index='reset')
+
+# Calculate data for changes in HF score (2008-2019)
+change2019 = hfi.loc[hfi['year'] == 2019, 'hf_score']
+change2008 = hfi.loc[hfi['year'] == 2008, 'hf_score']
+country2019 = hfi.loc[hfi['year'] == 2019, 'countries']
+ISO2019 = hfi.loc[hfi['year'] == 2019, 'ISO']
+
+change = np.array(change2019) - np.array(change2008)
+
+d = {'change_hf': change, 'ISO': ISO2019, 'countries': country2019}
+changes2019 = pd.DataFrame(d)
+
+# Merge new df with df2019
+changeHumanScore = df2019.merge(changes2019, how='left', left_on=['countries'],
+                                right_on=['countries'])
+
+# 0 if Nan, 1 if decrease, 2 if increase
+changeHumanScore['changeLabel'] = [1 if x < 0 else 2 if x > 0 else 0 for x in
+                                   changeHumanScore['change_hf']]
+
+changeHumanScore.to_csv('changeHumanScore2019.csv', index='reset')
