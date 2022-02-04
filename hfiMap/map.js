@@ -7,6 +7,7 @@ async function drawChart() {
     const long = d => +d.longitude
     const population = d => +d.population
     const quartile = d => +d.hf_quartile
+    const humanScore = d => +d.hf_score
 
     // 2. Create chart dimensions
 
@@ -76,8 +77,7 @@ async function drawChart() {
             .attr("r", d => rScale(population(d)))
             .attr("fill", d => colorScale(quartile(d)))
             .style('opacity', 0.35)
-            .on("mouseenter", onMouseEnter)
-            .on("mouseleave", onMouseLeave)
+
 
         const oldDots = dots.exit()
             .remove()
@@ -86,50 +86,91 @@ async function drawChart() {
 
   drawScatter(dataset)
 
-  const tooltip = d3.select("#tooltip")
+    // set up interactions
+    bounds.selectAll('circle')
+        .on('mouseenter', onMouseEnter)
+        .on('mouseleave', onMouseLeave)
 
-  function onMouseEnter(e, datum) {
+    const tooltip = d3.select('#tooltip')
+    function onMouseEnter(e, datum) {
 
-    const dayDot = bounds.append("circle")
-        .attr("class", "tooltipDot")
-        .attr("cx", d => xScale(lat(datum)))
-        .attr("cy", d => yScale(long(datum)))
-        .attr("r", d => rScale(population(datum)))
-        // .style('stroke', 'black')
-        .style('stroke-width', 0.2)
-        .style("pointer-events", "none")
+      const formatPopulation = d3.format(',')
+      tooltip.select('#population')
+          .text(formatPopulation(datum.population))
+
+      const formatHumanScore = d3.format('.2f')
+      tooltip.select('#humanScore')
+          .text(formatHumanScore(datum.hf_score))
+
+      tooltip.select('#countries')
+          .text(datum.country)
+
+      tooltip.select('#city')
+          .text(datum.asciiname)
+
+      const x = xScale(lat(datum))
+        + dimensions.margin.left
+      const y = yScale(long(datum))
+        + dimensions.margin.top
 
 
-    const formatPopulation = d3.format(",")
-    tooltip.select("#population")
-        .text(formatPopulation(datum.population))
+      tooltip.style('transform', `translate(`
+        + `calc( -50% + ${x}px),`
+        + `calc( -100% + ${y}px)`
+        + `)`)
 
-    tooltip.select("#countries")
-        .text(datum.country)
-
-    tooltip.select("#city")
-        .text(datum.asciiname)
-
-    const x = xScale(lat(datum))
-      + dimensions.margin.left
-    const y = yScale(long(datum))
-      + dimensions.margin.top
-
-    tooltip.style("transform", `translate(`
-      + `calc( -50% + ${x}px),`
-      + `calc( -100% + ${y}px)`
-      + `)`)
-
-    tooltip.style("opacity", 1)
+      tooltip.style('opacity', 1)
 
     }
 
-  function onMouseLeave() {
-    d3.selectAll(".tooltipDot")
-      .remove()
+    function onMouseLeave() {
+      tooltip.style('opacity', 0)
+    }
 
-    tooltip.style("opacity", 0)
-  }
+  // const tooltip = d3.select("#tooltip")
+  //
+  // function onMouseEnter(e, datum) {
+  //
+  //   const dayDot = bounds.append("circle")
+  //       .attr("class", "tooltipDot")
+  //       .attr("cx", d => xScale(lat(datum)))
+  //       .attr("cy", d => yScale(long(datum)))
+  //       .attr("r", d => rScale(population(datum)))
+  //       // .style('stroke', 'black')
+  //       .style('stroke-width', 0.2)
+  //       .style("pointer-events", "none")
+  //
+  //
+  //   const formatPopulation = d3.format(",")
+  //   tooltip.select("#population")
+  //       .text(formatPopulation(datum.population))
+  //
+  //   tooltip.select("#countries")
+  //       .text(datum.country)
+  //
+  //   tooltip.select("#city")
+  //       .text(datum.asciiname)
+  //
+  //   const x = xScale(lat(datum))
+  //     + dimensions.margin.left
+  //   const y = yScale(long(datum))
+  //     + dimensions.margin.top
+  //
+  //   tooltip.style("transform", `translate(`
+  //     + `calc( -50% + ${x}px),`
+  //     + `calc( -100% + ${y}px)`
+  //     + `)`)
+  //
+  //   tooltip.style("opacity", 1)
+  //
+  //   }
+  //
+  // function onMouseLeave() {
+  //   d3.selectAll(".tooltipDot")
+  //     .remove()
+  //
+  //   tooltip.style("opacity", 0)
+  // }
 }
 
 drawChart()
