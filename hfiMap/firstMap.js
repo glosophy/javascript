@@ -60,9 +60,9 @@ async function drawChart() {
 
         rScale.range([rMin, rMax])
 
-        const colorScale = d3.scaleOrdinal(d3.schemeCategory10)
-            .domain([0, 1, 2])
-            .range(['grey', 'blue', 'orange'])
+        // const colorScale = d3.scaleOrdinal(d3.schemeCategory10)
+        //     .domain([0, 1, 2])
+        //     .range(['grey', 'blue', 'orange'])
 
   const drawScatter = (dataset) => {
 
@@ -77,7 +77,7 @@ async function drawChart() {
             .attr("cx", d => xScale(long(d)))
             .attr("cy", d => yScale(lat(d)))
             .attr("r", d => rScale(population(d)))
-            .attr("fill", d => colorScale(changeLabel(d)))
+            .attr("fill", 'white')
             .style('opacity', 0.35)
 
 
@@ -94,21 +94,21 @@ async function drawChart() {
       .on('mouseenter', onMouseEnter)
       .on('mouseleave', onMouseLeave)
 
-    const tooltip = d3.select('#tooltip')
+    const tooltip = d3.select('#tooltip1')
     function onMouseEnter(e, datum) {
 
       const formatPopulation = d3.format(',')
-      tooltip.select('#population')
+      tooltip.select('#population1')
           .text(formatPopulation(datum.population))
 
       const formatHumanScore = d3.format('.2f')
-      tooltip.select('#humanScore')
+      tooltip.select('#humanScore1')
           .text(formatHumanScore(datum.hf_score))
 
-      tooltip.select('#countries')
+      tooltip.select('#countries1')
           .text(datum.country)
 
-      tooltip.select('#city')
+      tooltip.select('#city1')
           .text(datum.asciiname)
 
       const x = xScale(long(datum))
