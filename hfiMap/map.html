@@ -3,7 +3,11 @@
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="./style.css"></link>
-    <title>D3 Example</title>
+    <title>Human Freedom Map</title>
+
+    <script src="./../d3.v6.js"></script>
+    <script src="./map.js"></script>
+    <script src="./firstMap.js"></script>
 
   </head>
   <body>
@@ -31,8 +35,33 @@
 
     </div>
 
-        <script src="./../d3.v6.js"></script>
-        <script src="./map.js"></script>
+
+
+    <div id="wrapper" class= 'wrapper1'>
+      <div id="tooltip" class="tooltip1">
+
+            <div class="tooltip-countries">
+                <span id="countries1"></span>
+            </div>
+
+            <div class="tooltip-humanScore">
+                Human Freedom: <span id="humanScore1"></span>
+            </div>
+
+            <div class="tooltip-city">
+                City: <span id="city1"></span>
+            </div>
+
+            <div class="tooltip-population">
+                Population: <span id="population1"></span>
+            </div>
+
+      </div>
+
+    </div>
+
+
+
 
   </body>
 </html>
