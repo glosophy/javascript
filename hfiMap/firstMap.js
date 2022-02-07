@@ -32,7 +32,7 @@ async function drawChart() {
 
     // create chart area
     const wrapper = d3
-        .select("#wrapper")
+        .select("#wrapper1")
         .append("svg")
         .attr("width", dimensions.width)
         .attr("height", dimensions.height)
@@ -77,7 +77,7 @@ async function drawChart() {
             .attr("cx", d => xScale(long(d)))
             .attr("cy", d => yScale(lat(d)))
             .attr("r", d => rScale(population(d)))
-            .attr("fill", 'white')
+            .attr("fill", 'black')
             .style('opacity', 0.35)
 
 

@@ -1,4 +1,9 @@
-#wrapper {
+#wrapper1 {
+    position: relative;
+    background-color: black;
+}
+
+#wrapper2 {
     position: relative;
 }
 
