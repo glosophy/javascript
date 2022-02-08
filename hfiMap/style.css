@@ -1,10 +1,15 @@
 #wrapper1 {
     position: relative;
     background-color: black;
+    display: inline-block;
+    vertical-align: top;
+    vertical-align: middle;
 }
 
 #wrapper2 {
     position: relative;
+    vertical-align: middle;
+    vertical-align: bottom;
 }
 
 circle {
@@ -15,12 +20,18 @@ circle {
 body {
     display: flex;
     justify-content: center;
-    padding: 3em 1em;
+    flex-direction: column;
+    align-content: flex-start;
+    /* padding: 3em 1em; */
     font-family: sans-serif;
+    margin-top: 0px;
+    margin-right: 0px;
+    margin-bottom: 0px;
+    margin-left: 0px;
 }
 
 
-.tooltip {
+#tooltip2 {
     opacity: 0;
     position: absolute;
     top: -14px;
@@ -36,7 +47,7 @@ body {
     pointer-events: none;
 }
 
-.tooltip:before {
+#tooltip2:before {
     content: '';
     position: absolute;
     bottom: 0;
@@ -52,7 +63,46 @@ body {
     z-index: 10;
 }
 
-.tooltip-countries {
+#tooltip-countries2 {
+    margin-bottom: 0.2em;
+    font-weight: 600;
+    font-size: 1.1em;
+    line-height: 1.4em;
+}
+
+#tooltip1 {
+    opacity: 0;
+    position: absolute;
+    top: -14px;
+    left: 0;
+    padding: 0.6em 1em;
+    background: #fff;
+    text-align: center;
+    line-height: 1.4em;
+    font-size: 0.9em;
+    border: 1px solid #ddd;
+    z-index: 10;
+    transition: all 0.1s ease-out;
+    pointer-events: none;
+}
+
+#tooltip1:before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 12px;
+    height: 12px;
+    background: white;
+    border: 1px solid #ddd;
+    border-top-color: transparent;
+    border-left-color: transparent;
+    transform: translate(-50%, 50%) rotate(45deg);
+    transform-origin: center center;
+    z-index: 10;
+}
+
+#tooltip-countries1 {
     margin-bottom: 0.2em;
     font-weight: 600;
     font-size: 1.1em;

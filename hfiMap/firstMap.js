@@ -12,8 +12,8 @@ async function drawChart() {
     // 2. Create chart dimensions
 
     const width = d3.min([
-    window.innerWidth * 1.75,
-    window.innerHeight * 1.75,
+    window.innerWidth * 1.85,
+    window.innerHeight * 1.85,
     ])
 
     let dimensions = {
@@ -22,8 +22,8 @@ async function drawChart() {
         margin: {
             top: 10,
             right: 10,
-            bottom: 50,
-            left: 50,
+            bottom: 100,
+            left: 0,
         },
     }
 
@@ -77,7 +77,7 @@ async function drawChart() {
             .attr("cx", d => xScale(long(d)))
             .attr("cy", d => yScale(lat(d)))
             .attr("r", d => rScale(population(d)))
-            .attr("fill", 'black')
+            .attr("fill", 'white')
             .style('opacity', 0.35)
 
 

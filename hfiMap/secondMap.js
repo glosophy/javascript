@@ -94,21 +94,21 @@ async function drawChart() {
       .on('mouseenter', onMouseEnter)
       .on('mouseleave', onMouseLeave)
 
-    const tooltip = d3.select('#tooltip')
+    const tooltip = d3.select('#tooltip2')
     function onMouseEnter(e, datum) {
 
       const formatPopulation = d3.format(',')
-      tooltip.select('#population')
+      tooltip.select('#population2')
           .text(formatPopulation(datum.population))
 
       const formatHumanScore = d3.format('.2f')
-      tooltip.select('#humanScore')
+      tooltip.select('#humanScore2')
           .text(formatHumanScore(datum.hf_score))
 
-      tooltip.select('#countries')
+      tooltip.select('#countries2')
           .text(datum.country)
 
-      tooltip.select('#city')
+      tooltip.select('#city2')
           .text(datum.asciiname)
 
       const x = xScale(long(datum))
