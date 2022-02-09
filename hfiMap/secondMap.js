@@ -1,7 +1,7 @@
 async function drawChart() {
 
     // 1. Access data
-    let dataset = await d3.csv("https://gist.githubusercontent.com/glosophy/3c245c2723c257b8c98982736a015363/raw/7477bbc3125ea2540b3c649a2e7a53f4ac7e87cb/changeHumanScore2019.csv")
+    let dataset = await d3.csv("https://gist.githubusercontent.com/glosophy/944a0465d9e2272af0554586e1cee9c1/raw/0a70612e96faf2214ff731d816df54b2af0bbf1b/changeHumanScore2019.csv")
 
     const lat = d => +d.latitude
     const long = d => +d.longitude
@@ -61,8 +61,8 @@ async function drawChart() {
         rScale.range([rMin, rMax])
 
         const colorScale = d3.scaleOrdinal(d3.schemeCategory10)
-            .domain([0, 1, 2])
-            .range(['grey', 'blue', 'orange'])
+            .domain([0, 1, 2, 3])
+            .range(['black', 'red', 'orange', 'green'])
 
   const drawScatter = (dataset) => {
 

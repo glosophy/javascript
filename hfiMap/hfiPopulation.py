@@ -95,8 +95,9 @@ changes2019 = pd.DataFrame(d)
 changeHumanScore = df2019.merge(changes2019, how='left', left_on=['countries'],
                                 right_on=['countries'])
 
+
 # 0 if Nan, 1 if decrease, 2 if increase
-changeHumanScore['changeLabel'] = [1 if x < 0 else 2 if x > 0 else 0 for x in
+changeHumanScore['changeLabel'] = [1 if x < 0 else 2 if x > 0 else 3 if x == 0 else 0 for x in
                                    changeHumanScore['change_hf']]
 
 changeHumanScore.to_csv('changeHumanScore2019.csv', index='reset')
