@@ -22,8 +22,8 @@ async function drawChart() {
         margin: {
             top: 10,
             right: 10,
-            bottom: 50,
-            left: 50,
+            bottom: 100,
+            left: 0,
         },
     }
 
