@@ -1,4 +1,21 @@
+* {
+    margin: 0;
+}
+
+#first-chart {
+    width:1500px;
+}
+
+.logo-hfi {
+    position: absolute;
+    width: 170px;
+    top:60%;
+    left:10%;
+    z-index: 3;
+}
+
 #wrapper1 {
+    width: 100%;
     position: relative;
     background-color: black;
     display: inline-block;
@@ -7,6 +24,8 @@
 }
 
 #wrapper2 {
+    width: 100%;
+    background-color: white;
     position: relative;
     vertical-align: middle;
     vertical-align: bottom;
@@ -16,8 +35,9 @@ circle {
     opacity: 0.3;
 }
 
-
 body {
+    width: 100%;
+    background-color: black;
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -25,20 +45,60 @@ body {
     font-family: 'Roboto', sans-serif;
 }
 
-p {
-  font-family: 'Georgia', serif;
-  font-weight: 400;
-  font-style: normal;
-  font-size: 20px;
-  line-height: 2;
-  color: #222222;
-  /* margin: 30px 100px 30px 100px; */
-  width: 65%;
+/* ############## TEXT ################ */
+
+.large_body {
+    width:100%;
 }
 
-#title {
-  color: white;
+.top-header {
+    width:100%;
+    background-color: black;
+    height: 50px;
 }
+
+.top-title {
+    width:200px;
+    margin:auto;
+}
+
+.intro-section {
+    width: 100%;
+    background-color: white;
+    padding-top: 140px;
+    padding-bottom: 100px;
+}
+
+.content-1 {
+    width: 40%;
+    background-color: white;
+    margin: auto;
+    text-align: center;
+}
+
+h1 {
+    font-size: 72px;
+}
+
+.title-two {
+    font-size: 40px;
+    margin-bottom: 50px;
+}
+
+p {
+    font-family: 'Proxima Nova';
+    font-weight: 400;
+    font-style: normal;
+    font-size: 25px;
+    line-height: 2;
+    color: #222222;
+    text-align: center;
+}
+
+
+/* ############ TOOLTIPS ################ */
+
+
 
 #tooltip2 {
     opacity: 0;
