@@ -11,9 +11,10 @@ async function drawChart() {
 
     // 2. Create chart dimensions
 
+
     const width = d3.min([
-    window.innerWidth * 1.75,
-    window.innerHeight * 1.75,
+        window.innerWidth * 1.75,
+        window.innerHeight * 1.75,
     ])
 
     let dimensions = {
@@ -22,8 +23,8 @@ async function drawChart() {
         margin: {
             top: 10,
             right: 10,
-            bottom: 50,
-            left: 50,
+            bottom: 100,
+            left: 0,
         },
     }
 

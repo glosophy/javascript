@@ -1,4 +1,21 @@
+* {
+    margin: 0;
+}
+
+#first-chart {
+    width:1500px;
+}
+
+.logo-hfi {
+    position: absolute;
+    width: 170px;
+    top:60%;
+    left:10%;
+    z-index: 3;
+}
+
 #wrapper1 {
+    width: 100%;
     position: relative;
     background-color: black;
     display: inline-block;
@@ -7,6 +24,8 @@
 }
 
 #wrapper2 {
+    width: 100%;
+    background-color: white;
     position: relative;
     vertical-align: middle;
     vertical-align: bottom;
@@ -16,19 +35,69 @@ circle {
     opacity: 0.3;
 }
 
-
 body {
+    width: 100%;
+    background-color: black;
     display: flex;
     justify-content: center;
     flex-direction: column;
     align-content: flex-start;
-    /* padding: 3em 1em; */
-    font-family: sans-serif;
-    margin-top: 0px;
-    margin-right: 0px;
-    margin-bottom: 0px;
-    margin-left: 0px;
+    font-family: 'Roboto', sans-serif;
 }
+
+/* ############## TEXT ################ */
+
+.large_body {
+    width:100%;
+}
+
+.top-header {
+    width:100%;
+    background-color: black;
+    height: 50px;
+}
+
+.top-title {
+    width:200px;
+    margin:auto;
+}
+
+.intro-section {
+    width: 100%;
+    background-color: white;
+    padding-top: 140px;
+    padding-bottom: 100px;
+}
+
+.content-1 {
+    width: 40%;
+    background-color: white;
+    margin: auto;
+    text-align: center;
+}
+
+h1 {
+    font-size: 72px;
+}
+
+.title-two {
+    font-size: 40px;
+    margin-bottom: 50px;
+}
+
+p {
+    font-family: 'Proxima Nova';
+    font-weight: 400;
+    font-style: normal;
+    font-size: 25px;
+    line-height: 2;
+    color: #222222;
+    text-align: center;
+}
+
+
+/* ############ TOOLTIPS ################ */
+
 
 
 #tooltip2 {
@@ -45,6 +114,7 @@ body {
     z-index: 10;
     transition: all 0.1s ease-out;
     pointer-events: none;
+    font-family: sans-serif;
 }
 
 #tooltip2:before {
@@ -61,6 +131,7 @@ body {
     transform: translate(-50%, 50%) rotate(45deg);
     transform-origin: center center;
     z-index: 10;
+    font-family: sans-serif;
 }
 
 #tooltip-countries2 {
@@ -68,43 +139,5 @@ body {
     font-weight: 600;
     font-size: 1.1em;
     line-height: 1.4em;
-}
-
-#tooltip1 {
-    opacity: 0;
-    position: absolute;
-    top: -14px;
-    left: 0;
-    padding: 0.6em 1em;
-    background: #fff;
-    text-align: center;
-    line-height: 1.4em;
-    font-size: 0.9em;
-    border: 1px solid #ddd;
-    z-index: 10;
-    transition: all 0.1s ease-out;
-    pointer-events: none;
-}
-
-#tooltip1:before {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    width: 12px;
-    height: 12px;
-    background: white;
-    border: 1px solid #ddd;
-    border-top-color: transparent;
-    border-left-color: transparent;
-    transform: translate(-50%, 50%) rotate(45deg);
-    transform-origin: center center;
-    z-index: 10;
-}
-
-#tooltip-countries1 {
-    margin-bottom: 0.2em;
-    font-weight: 600;
-    font-size: 1.1em;
-    line-height: 1.4em;
+    font-family: sans-serif;
 }
