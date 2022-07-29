@@ -4,7 +4,9 @@ canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 // console.log(ctx);
 
-ctx.beginPath();
-ctx.rect(100, 100, 100, 100);
-// ctx.fill();
-ctx.stroke();
+canvas.addEventListener('mouseMove', function (e) {
+  ctx.beginPath();
+  ctx.rect(e.x, e.y, 10, 10);
+  ctx.fill();
+  // console.log(e.x, e.y);
+})
