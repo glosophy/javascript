@@ -19,4 +19,4 @@ This repo includes:
 * `/histograms`: histograms with `d3.transition()`. [Here is a tweet](https://twitter.com/gsutters/status/1481422689940217861?s=20) I made with the final result.
 * `/voronoi`: a scatter plot turned into a voronoi chart. [Here is a tweet](https://twitter.com/gsutters/status/1483243151796154373?s=20) I made with the final result.
 * `/hfiMap`: files for a scatter plot turned into a world map with human freedom data and latitudes and longitudes from more than 20,000 cities. (Still under construction)
-* `/cc_brunoImbrizi`: all the scripts from Bruno Imbrizi's course on Domestika. Some folders include samples with the results of some sketches.
+* `/cc_brunoImbrizi`: all the scripts from Bruno Imbrizi's course on Domestika. Some folders include samples with the results of some sketches. [Here is a tweet](https://twitter.com/gsutters/status/1552837474182905857?s=20&t=uXN_JSwPcPkgDaWQd3xP6A) I made with some images I created for the course.
