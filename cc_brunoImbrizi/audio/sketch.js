@@ -26,7 +26,7 @@ const sketch = () => {
   let lineWidth, bin, mapped;
 
   for (let i = 0; i < numCircles * numSlices; i++) {
-    bin = random.rangeFloor(4, 50);
+    bin = random.rangeFloor(4, 400);
     bins.push(bin);
   }
 
@@ -105,6 +105,8 @@ const createAudio = () => {
   minDb = analyserNode.minDecibels;
   maxDb = analyserNode.maxDecibels;
 
+  console.log(minDb);
+
   // store the data in an array
   audioData = new Float32Array(analyserNode.frequencyBinCount);
 
@@ -116,6 +118,8 @@ const getAverage = (data) => {
 
   for (let i = 0; i < data.length; i++) {
     sum += data[i];
+
+    console.log(sum);
   };
 
   return sum / data.length;
