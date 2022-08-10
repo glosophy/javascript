@@ -1,7 +1,7 @@
-const canvasSketch = require("canvas-sketch");
-const math = require('canvas-sketch-util/math');
-const random = require('canvas-sketch-util/random');
-const eases = require('eases')
+const canvasSketch = require('node_modules/canvas-sketch');
+const math = require('node_modules/canvas-sketch-util/math');
+const random = require('node_modules/canvas-sketch-util/random');
+const eases = require('node_modules/eases');
 
 const settings = {
   dimensions: [1080, 1080],
