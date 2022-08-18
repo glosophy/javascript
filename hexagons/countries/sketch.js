@@ -4,7 +4,6 @@
 let year_1920 = 21;
 let year_2019 = 73;
 
-
 // declare fixed variables
 let diam = 30;
 let total_hex = year_2019;
